@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio • Projects</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="floating-shape shape-1"></div>
+    <div class="floating-shape shape-2"></div>
+    <div class="floating-shape shape-3"></div>
+
+    <header class="site-header" data-animate>
+      <div class="header-brand">
+        <img class="header-avatar" src="./asset/monisha.jpg" alt="Monisha portrait" />
+        <a class="logo" href="./index.html">
+          <span>Monisha.L</span>
+        </a>
+      </div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./projects.html">Projects</a></li>
+          <li><a href="./about.html">About</a></li>
+          <li><a href="./details.html">Details</a></li>
+        </ul>
+      </nav>
+      <a class="cta-btn ghost" href="asset/resume.pdf" download>Download Resume</a>
+    </header>
+
+    <main>
+      <section data-animate>
+        <div class="section-header">
+          <h1 class="section-title">Mini Projects</h1>
+          <span class="section-subtitle">Hands-on explorations that bring resume ideas to life</span>
+        </div>
+        <div class="projects-grid">
+          <article class="project-card" data-animate>
+            <img
+              src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=800&q=80"
+              alt="Person making a mobile payment"
+            />
+            <div class="project-body">
+              <div class="project-meta">
+                <span>UI/UX Design</span>
+                <span>Figma</span>
+              </div>
+              <h3>GooglePay Clone App</h3>
+              <p class="project-desc">
+                Recreated a digital wallet experience with streamlined payment flows, iconography, and micro-interactions.
+              </p>
+              <div class="project-links">
+                <span class="tag">UI/UX</span>
+                <span class="tag">Prototyping</span>
+                <a class="external-link" href="https://www.figma.com/proto/c4mB8DLRCOUC4wARmGzd5D/Untitled?node-id=51-2&starting-point-node-id=51%3A2" target="_blank" rel="noreferrer">View prototype</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card" data-animate>
+            <img
+              src="https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=800&q=80"
+              alt="People using a crosswalk"
+            />
+            <div class="project-body">
+              <div class="project-meta">
+                <span>Web Build</span>
+                <span>2023</span>
+              </div>
+              <h3>Safety Awareness Game</h3>
+              <p class="project-desc">
+                Designed a web game that teaches everyday safety choices with storytelling and progressive challenges.
+              </p>
+              <div class="project-links">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">JavaScript</span>
+                <a class="external-link" href="https://github.com/Monisha1708/Safety-Awareness-Game-Website.git" target="_blank" rel="noreferrer">View repository</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card" data-animate>
+            <img
+              src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80"
+              alt="Designer working on laptop with analytics"
+            />
+            <div class="project-body">
+              <div class="project-meta">
+                <span>Web App</span>
+                <span>Recommendation</span>
+              </div>
+              <h3>AI Recommendation Website</h3>
+              <p class="project-desc">
+                Built a concept interface that surfaces tailored suggestions using intuitive filters and call-to-action cues.
+              </p>
+              <div class="project-links">
+                <span class="tag">JavaScript</span>
+                <span class="tag">UI Design</span>
+                <a class="external-link" href="https://github.com/Monisha1708/AI-Recommendation-Website.git" target="_blank" rel="noreferrer">View repository</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card" data-animate>
+            <img
+              src="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?auto=format&fit=crop&w=800&q=80"
+              alt="Decorated cake on display"
+            />
+            <div class="project-body">
+              <div class="project-meta">
+                <span>Responsive Site</span>
+                <span>Brand Story</span>
+              </div>
+              <h3>Cake Bakery Website</h3>
+              <p class="project-desc">
+                Crafted a sweet shop landing page with product highlights, ordering CTAs, and warm pastel visuals.
+              </p>
+              <div class="project-links">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">UX Writing</span>
+                <a class="external-link" href="https://github.com/Monisha1708/Cake-Bakery-Website.git" target="_blank" rel="noreferrer">View repository</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer data-animate>
+      <p>© <span id="footer-year"></span> Monisha.L Designing the future of web experiences.</p>
+      <div class="footer-social">
+        <a href="https://github.com/Monisha1708" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="http://linkedin.com/in/monisha-1-5a26b7280" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="mailto:monishaloganathan1708@gmail.com">Email</a>
+      </div>
+    </footer>
+
+    <script src="./script.js" defer></script>
+  </body>
+</html>
