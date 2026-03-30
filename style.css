@@ -18,6 +18,17 @@ html.lenis, html.lenis body {
   pointer-events: none;
 }
 
+/* Hide Scrollbar for most browsers */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* make scrollbar transparent */
+}
+
+html {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
 :root {
   --bg: #05060f;
   --bg-contrast: rgba(7, 10, 25, 0.72);
