@@ -1,3 +1,23 @@
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
 :root {
   --bg: #05060f;
   --bg-contrast: rgba(7, 10, 25, 0.72);
@@ -29,14 +49,24 @@ html {
   scroll-behavior: smooth;
 }
 
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
 body {
   min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+body {
   background: var(--bg);
   color: var(--text-primary);
   font-family: "Poppins", "Segoe UI", Cantarell, sans-serif;
   line-height: 1.6;
-  position: relative;
-  overflow-x: hidden;
 }
 
 body::before {
@@ -74,8 +104,9 @@ img {
 
 .site-header {
   width: 100%;
+  max-width: 100%;
   margin: 0;
-  padding: 1rem clamp(1.5rem, 6vw, 4rem);
+  padding: 1rem clamp(1.2rem, 5vw, 3rem);
   border-radius: 0 0 28px 28px;
   background: linear-gradient(135deg, rgba(10, 17, 40, 0.95), rgba(18, 28, 62, 0.88)),
     radial-gradient(circle at 10% -20%, rgba(118, 196, 255, 0.35), transparent 55%);
@@ -87,8 +118,11 @@ img {
   gap: 1rem;
   position: sticky;
   top: 0;
-  z-index: 20;
+  left: 0;
+  right: 0;
+  z-index: 1000;
   transition: background var(--transition-fluid), transform var(--transition-snappy), opacity var(--transition-snappy);
+  box-sizing: border-box;
 }
 
 .site-header.elevated {
@@ -218,9 +252,51 @@ img {
   transform: translateY(-3px);
 }
 
+/* ── Hero Stats ── */
+.hero-stats {
+  display: flex;
+  gap: 1.2rem;
+  margin: 1.2rem 0;
+  flex-wrap: wrap;
+}
+
+.stat-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1rem;
+  background: rgba(118, 196, 255, 0.08);
+  border: 1px solid rgba(118, 196, 255, 0.15);
+  border-radius: 999px;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  backdrop-filter: blur(8px);
+}
+
+.stat-pill strong {
+  color: var(--accent-1);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.stat-pill .stat-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--accent-1);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--accent-1);
+  animation: pulseStat 2s infinite;
+}
+
+@keyframes pulseStat {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.6; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
 main {
-  width: min(1040px, 92vw);
-  margin: 3.5rem auto 4.5rem;
+  width: min(1200px, 94vw); /* Increased from 1040px for 1445px optimization */
+  margin: 3rem auto 5rem;
   position: relative;
   z-index: 1;
 }
@@ -321,7 +397,6 @@ section {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-fill-color: transparent;
   font-size: 1.2em;
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -677,6 +752,13 @@ section {
 .project-card img {
   height: 200px;
   object-fit: cover;
+  width: 100%;
+}
+
+@media (max-width: 480px) {
+  .project-card img {
+    height: 180px;
+  }
 }
 
 .project-body {
@@ -854,12 +936,18 @@ section {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
+  overflow: hidden;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .contact-item {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .contact-item span:first-child {
@@ -871,6 +959,46 @@ section {
 
 .contact-item span:last-child {
   font-size: 1rem;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+  white-space: normal;
+  max-width: 100%;
+}
+
+.contact-link {
+  font-size: 1rem;
+  color: var(--text-primary);
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+  white-space: normal;
+  max-width: 100%;
+  display: block;
+  position: relative;
+  transition: color var(--transition-snappy), transform var(--transition-snappy);
+}
+
+.contact-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1.5px;
+  background: var(--gradient-1);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-snappy);
+}
+
+.contact-link:hover {
+  color: var(--accent-3);
+  transform: translateX(3px);
+}
+
+.contact-link:hover::after {
+  transform: scaleX(1);
 }
 
 .contact-form {
@@ -1071,25 +1199,497 @@ textarea {
   }
 }
 
+/* ═══════════════════════════════════════════
+   HAMBURGER MENU  (visible only ≤ 768px)
+═══════════════════════════════════════════ */
+
+/* Button — hidden on desktop */
+.hamburger-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 10px;
+  transition: background 240ms ease;
+  z-index: 50;
+  flex-shrink: 0;
+}
+
+.hamburger-btn:hover {
+  background: rgba(118, 196, 255, 0.1);
+}
+
+/* Three lines */
+.hamburger-btn .bar {
+  display: block;
+  width: 24px;
+  height: 2.5px;
+  border-radius: 4px;
+  background: var(--text-primary);
+  transition: transform 340ms cubic-bezier(0.16, 1, 0.3, 1),
+              opacity   240ms ease,
+              width     240ms ease;
+  transform-origin: center;
+}
+
+/* Animate to X */
+.hamburger-btn.is-open .bar:nth-child(1) {
+  transform: translateY(7.5px) rotate(45deg);
+}
+.hamburger-btn.is-open .bar:nth-child(2) {
+  opacity: 0;
+  width: 0;
+}
+.hamburger-btn.is-open .bar:nth-child(3) {
+  transform: translateY(-7.5px) rotate(-45deg);
+}
+
+/* Dark overlay behind menu */
+.nav-overlay {
+  display: flex;
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 6, 15, 0.65);
+  backdrop-filter: blur(6px);
+  z-index: 900;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 320ms ease, visibility 320ms ease;
+}
+.nav-overlay.is-open {
+  opacity: 1;
+}
+
+/* Mobile nav panel */
+.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 950;
+  visibility: hidden;
+  pointer-events: none;
+  padding-top: 80px; /* space for header */
+  background: linear-gradient(160deg, rgba(10, 17, 40, 0.98), rgba(18, 28, 62, 0.98));
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-glass);
+  box-shadow: 0 20px 50px rgba(4, 10, 50, 0.5);
+  transform: translateY(-110%);
+  transition: transform 380ms cubic-bezier(0.16, 1, 0.3, 1), visibility 380ms ease;
+  border-radius: 0 0 24px 24px;
+}
+
+.mobile-nav.is-open {
+  transform: translateY(0);
+}
+
+.mobile-nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  padding: 1.4rem 1.6rem 1.8rem;
+  gap: 0.3rem;
+}
+
+.mobile-nav ul li a {
+  display: block;
+  padding: 0.85rem 1rem;
+  border-radius: 14px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  letter-spacing: 0.02em;
+  transition: background 220ms ease, color 220ms ease, transform 220ms ease;
+}
+
+.mobile-nav ul li a:hover,
+.mobile-nav ul li a[aria-current="page"] {
+  background: rgba(118, 196, 255, 0.1);
+  color: var(--text-primary);
+  transform: translateX(6px);
+}
+
+.mobile-nav ul li a[aria-current="page"] {
+  background: rgba(106, 250, 204, 0.12);
+  color: #6afacc;
+  font-weight: 600;
+}
+
+/* Resume CTA inside mobile nav */
+.mobile-nav .mobile-nav-cta {
+  padding: 0 1.25rem 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.mobile-nav .mobile-nav-cta a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0.9rem 1.4rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(73, 231, 168, 0.92), rgba(118, 196, 255, 0.85));
+  color: #040510;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  transition: transform 220ms ease, box-shadow 220ms ease;
+  box-shadow: 0 10px 30px rgba(73, 231, 168, 0.25);
+  box-sizing: border-box;
+}
+
+.mobile-nav .mobile-nav-cta a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(118, 196, 255, 0.35);
+}
+
+@media (max-width: 1100px) {
+  .projects-grid, .highlights-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+@media (max-width: 1024px) {
+  main {
+    width: 94vw;
+  }
+  
+  .hero-content h1 {
+    font-size: 3rem;
+  }
+}
+
 @media (max-width: 768px) {
+
+  :root {
+    --glass-blur: 12px;
+  }
+
   .site-header {
-    flex-direction: column;
-    align-items: stretch;
+    padding: 0.75rem 1rem;
+    border-radius: 0 0 16px 16px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .hamburger-btn {
+    display: flex;
+  }
+
+  /* Ensure overlay/nav are properly hidden but ready for animation */
+  .mobile-nav, .nav-overlay {
+    display: flex;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .mobile-nav.is-open, .nav-overlay.is-open {
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  /* Hide original desktop nav */
+  .site-header nav {
+    display: none;
+  }
+
+  .site-header .cta-btn.ghost {
+    display: none;
+  }
+
+  .header-brand {
+    justify-content: center;
   }
 
   .nav-links {
     width: 100%;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
   }
 
-  .hero-actions {
+  .nav-links a {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.85rem;
+  }
+
+  .header-avatar {
+    width: 38px;
+    height: 38px;
+  }
+
+  .site-header .cta-btn {
+    display: none; /* Hide 'Let's Connect' in header for medium screens to save space */
+  }
+
+  main {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  section {
+    padding: 1.5rem 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 20px; 
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    border: 1px solid var(--border-glass);
+    border-left: none; /* Make it feel full screen by removing side borders if needed */
+    border-right: none;
+  }
+
+  /* Add back padding for inner content alignment */
+  .section-header, 
+  .hero-content {
+    text-align: center;
+    align-items: center;
+  }
+
+  .highlight-card, 
+  .project-card, 
+  .skill-card, 
+  .contact-card {
+    border-radius: 18px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid var(--border-glass);
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.6rem;
+    margin-bottom: 2rem;
+  }
+
+  .section-title, .section-subtitle {
+    text-align: center;
     width: 100%;
   }
 
-  .cta-btn {
-    flex: 1;
+  .hero-content {
     text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-stats {
     justify-content: center;
+    width: 100%;
+    gap: 0.8rem;
+  }
+
+  .stat-pill {
+    padding: 0.5rem 0.85rem;
+    font-size: 0.8rem;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2.5rem;
+  }
+
+  .highlights-grid,
+  .projects-grid,
+  .skill-list-grid,
+  .skills-grid,
+  .contact-layout,
+  .timeline {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  /* Details page contact card responsive */
+  .contact-card {
+    width: 100%;
+    max-width: 100%;
+    padding: 1.1rem;
+    box-sizing: border-box;
+  }
+  
+  .floating-shape {
+    display: none; /* Hide shapes on mobile to avoid all overflow risks */
+  }
+
+  .contact-item span:last-child {
+    font-size: 0.9rem;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  .contact-card .cta-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .timeline-item {
+    padding-left: 2rem;
+  }
+
+  [data-animate] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  /* Ensure page stretches correctly to footer */
+  html, body {
+    height: auto;
+    min-height: 100%;
+    overflow-x: hidden;
+  }
+  
+  main {
+    min-height: calc(100vh - 160px); /* rough header+footer height */
+  }
+
+  footer {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem 1rem 0; /* Zero bottom padding */
+    gap: 0.8rem;
+    display: flex;
+    box-sizing: border-box;
+    margin-top: 1rem;
+    margin-bottom: 0;
+  }
+
+  .footer-social {
+    margin-bottom: 0;
+    padding-bottom: 1rem; /* minimal breathing room if needed, but the user wants NO gap */
+  }
+  
+  .footer-social a {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+
+  .site-header {
+    padding: 0.8rem 1rem;
+  }
+
+  .nav-links {
+    gap: 0.3rem;
+  }
+
+  .nav-links a {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .role-text {
+    font-size: 1.3rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+  }
+
+  .cta-btn {
+    width: 100%;
+    flex: none;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  /* ── Contact card fixes for 320–480px ── */
+  .contact-layout {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .contact-card {
+    padding: 1rem 0.9rem;
+    border-radius: 16px;
+    gap: 0.9rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .contact-item {
+    overflow: hidden;
+    max-width: 100%;
+  }
+
+  .contact-item span:last-child {
+    font-size: 0.85rem;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    white-space: normal;
+    max-width: 100%;
+    display: block;
+  }
+
+  /* Make the Download Resume button full-width inside the card */
+  .contact-card .cta-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.85rem 1rem;
+    font-size: 0.88rem;
+    flex: none;
+  }
+
+  /* Tighter section title on very small screens */
+  .section-title {
+    font-size: clamp(1.35rem, 7vw, 1.7rem);
+    line-height: 1.2;
+  }
+
+  .section-subtitle {
+    font-size: 0.88rem;
+  }
+
+  section {
+    padding: 1.2rem 1rem;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    border-left: none;
+    border-right: none;
+  }
+
+  main {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
   }
 }
 

@@ -1,3 +1,23 @@
+// ── Lenis Smooth Scroll Initialization ──
+const lenis = new Lenis({
+  duration: 1.2,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  direction: 'vertical',
+  gestureDirection: 'vertical',
+  smooth: true,
+  mouseMultiplier: 1,
+  smoothTouch: false,
+  touchMultiplier: 2,
+  infinite: false,
+});
+
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+
+requestAnimationFrame(raf);
+
 const observerOptions = {
   threshold: 0.2,
 };
@@ -109,17 +129,28 @@ const setupHeaderBehaviour = () => {
   let lastScrollY = window.scrollY;
 
   const handleScroll = () => {
-    const currentY = window.scrollY;
-    const shouldElevate = currentY > 10;
+    // Don't hide header if mobile menu is open
+    const isNavOpen = document.querySelector('.mobile-nav.is-open');
+    if (isNavOpen) return;
 
+    const currentY = window.scrollY;
+    // Scroll threshold to prevent flickering on load/refresh
+    if (Math.abs(currentY - lastScrollY) < 5) return;
+
+    const shouldElevate = currentY > 10;
     header.classList.toggle('elevated', shouldElevate);
 
     const isScrollingDown = currentY > lastScrollY;
-    const hidden = currentY > 150 && isScrollingDown;
+    const isPastHero = currentY > 200;
+    const hidden = isPastHero && isScrollingDown;
 
     header.classList.toggle('header-hidden', hidden);
     lastScrollY = currentY;
   };
+
+  // Initial check on load
+  const initialY = window.scrollY;
+  if (initialY > 10) header.classList.add('elevated');
 
   window.addEventListener('scroll', handleScroll, { passive: true });
 };
@@ -256,6 +287,46 @@ const initRoleAnimation = () => {
   }
 };
 
+const setupHamburger = () => {
+  const btn    = document.querySelector('.hamburger-btn');
+  const nav    = document.querySelector('.mobile-nav');
+  const links  = document.querySelectorAll('.mobile-nav a');
+  const overlay = document.querySelector('.nav-overlay');
+  if (!btn || !nav) return;
+
+  const open = () => {
+    btn.classList.add('is-open');
+    nav.classList.add('is-open');
+    overlay && overlay.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    btn.setAttribute('aria-expanded', 'true');
+  };
+
+  const close = () => {
+    btn.classList.remove('is-open');
+    nav.classList.remove('is-open');
+    overlay && overlay.classList.remove('is-open');
+    document.body.style.overflow = '';
+    btn.setAttribute('aria-expanded', 'false');
+    
+    // Safety check: force header visible on closure
+    const header = document.querySelector('.site-header');
+    if (header) header.classList.remove('header-hidden');
+  };
+
+  btn.addEventListener('click', () =>
+    btn.classList.contains('is-open') ? close() : open()
+  );
+
+  links.forEach(link => link.addEventListener('click', close));
+  overlay && overlay.addEventListener('click', close);
+
+  // close on resize back to desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) close();
+  });
+};
+
 const init = () => {
   animateElements();
   setupHeaderBehaviour();
@@ -263,6 +334,7 @@ const init = () => {
   updateFooterYear();
   handleContactForm();
   initRoleAnimation();
+  setupHamburger();
 };
 
 document.addEventListener('DOMContentLoaded', init);

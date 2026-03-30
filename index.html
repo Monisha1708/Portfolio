@@ -1,133 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio • Home</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./style.css" />
-  </head>
-  <body>
-    <div class="floating-shape shape-1"></div>
-    <div class="floating-shape shape-2"></div>
-    <div class="floating-shape shape-3"></div>
 
-    <header class="site-header" data-animate>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio • Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+  <div class="floating-shape shape-1"></div>
+  <div class="floating-shape shape-2"></div>
+  <div class="floating-shape shape-3"></div>
+
+  <div class="nav-overlay"></div>
+  <nav class="mobile-nav">
+    <ul>
+      <li><a href="./index.html">Home</a></li>
+      <li><a href="./projects.html">Projects</a></li>
+      <li><a href="./about.html">About</a></li>
+      <li><a href="./details.html">Details</a></li>
+    </ul>
+    <div class="mobile-nav-cta">
+      <a href="asset/Resume.pdf" download>Download Resume</a>
+    </div>
+  </nav>
+
+  <header class="site-header" data-animate>
+    <div class="header-brand">
+      <img class="header-avatar" src="./asset/monisha.jpg" alt="Monisha portrait" />
       <a class="logo" href="./index.html">
         <span>Monisha.L</span>
       </a>
-      <nav>
-        <ul class="nav-links">
-          <li><a href="./index.html">Home</a></li>
-          <li><a href="./projects.html">Projects</a></li>
-          <li><a href="./about.html">About</a></li>
-          <li><a href="./details.html">Details</a></li>
-        </ul>
-      </nav>
-      <a class="cta-btn ghost" href="./details.html">Let's Connect</a>
-    </header>
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="./index.html">Home</a></li>
+        <li><a href="./projects.html">Projects</a></li>
+        <li><a href="./about.html">About</a></li>
+        <li><a href="./details.html">Details</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="cta-btn ghost" href="asset/Resume.pdf" download>Download Resume</a>
+      <button class="hamburger-btn" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </header>
 
-    <main>
-      <section class="hero" data-animate>
-        <div class="hero-media" data-animate>
-          <div class="hero-photo">
-            <img
-              src="./asset/monisha.jpg"
-              alt="Portrait of Me"
-            />
-          </div>
+  <main>
+    <section class="hero" data-animate>
+      <div class="hero-media" data-animate>
+        <div class="hero-photo">
+          <img src="./asset/monisha.jpg" alt="Portrait of Me" />
         </div>
-        <div class="hero-content" data-animate>
-          <h1><span class="greeting">Hello, I'm</span> <span class="gradient-name">Monisha.L</span></h1>
-          <div class="role-container">
-            <div class="role-text">
-              <span class="static-text">I'm a </span>
-              <div class="dynamic-text">
-                <span class="typing"></span>
-                <span class="cursor">|</span>
-              </div>
+      </div>
+      <div class="hero-content" data-animate>
+        <h1><span class="greeting">Hello, I'm</span> <span class="gradient-name">Monisha.L</span></h1>
+        <div class="role-container">
+          <div class="role-text">
+            <span class="static-text">I'm a </span>
+            <div class="dynamic-text">
+              <span class="typing"></span>
+              <span class="cursor">|</span>
             </div>
           </div>
-          <p class="hero-tagline">
-            <span>Crafting immersive, fast experiences with intuitive design and modern interactive systems.</span>
-          </p>
-          <div class="hero-actions">
-            <a class="cta-btn" href="./projects.html">View Projects</a>
-            <a class="cta-btn ghost" href="asset/resume.pdf" download>Download Resume</a>
+        </div>
+
+        <!-- New Stats Row -->
+        <div class="hero-stats" data-animate>
+          <div class="stat-pill">
+            <span class="stat-dot"></span>
+            <strong>4+</strong> Happy Clients
+          </div>
+          <div class="stat-pill">
+            <span class="stat-dot"></span>
+            <strong>8+</strong> Projects Done
           </div>
         </div>
-      </section>
 
-      <section data-animate>
-        <div class="section-header">
-          <h2 class="section-title">Core Skills</h2>
-          <span class="section-subtitle">Strengths I apply to every collaboration</span>
+        <p class="hero-tagline">
+          <span>Crafting immersive, fast experiences with intuitive design and modern interactive systems.</span>
+        </p>
+        <div class="hero-actions">
+          <a class="cta-btn" href="./projects.html">View Projects</a>
+          <a class="cta-btn ghost" href="asset/Resume.pdf" download>Download Resume</a>
         </div>
-        <div class="highlights-grid">
-          <article class="highlight-card" data-animate>
-            <h3 class="highlight-title">Front-end Developer</h3>
-            <ul class="list-bullets">
-              <li>Semantic HTML, modern CSS, and responsive layouts</li>
-              <li>JavaScript interactivity and component-driven UI</li>
-            </ul>
-          </article>
-          <article class="highlight-card" data-animate>
-            <h3 class="highlight-title">Cloud & Data</h3>
-            <ul class="list-bullets">
-              <li>AWS Cloud fundamentals and deployment workflows</li>
-              <li>SQL reporting and Python automation scripts</li>
-            </ul>
-          </article>
-          <article class="highlight-card" data-animate>
-            <h3 class="highlight-title">Design & Collaboration</h3>
-            <ul class="list-bullets">
-              <li>UI/UX systems with Wireframes and prototyping in Figma</li>
-              <li>Communication, leadership, and stakeholder alignment</li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <section data-animate>
-        <div class="section-header">
-          <h2 class="section-title">Languages</h2>
-          <span class="section-subtitle">How I communicate and craft interfaces</span>
-        </div>
-        <div class="highlights-grid">
-          <article class="highlight-card" data-animate>
-            <h3 class="highlight-title">Spoken</h3>
-            <ul class="list-bullets">
-              <li>English</li>
-              <li>Tamil</li>
-            </ul>
-          </article>
-          <article class="highlight-card" data-animate>
-            <h3 class="highlight-title">Technical</h3>
-            <ul class="list-bullets">
-              <li>HTML, CSS, JavaScript</li>
-              <li>Python</li>
-              <li>SQL</li>
-              <li>Java (basic)</li>
-            </ul>
-          </article>
-        </div>
-      </section>
-    </main>
-
-    <footer data-animate>
-      <p>© <span id="footer-year"></span> Monisha.L Designing the future of web experiences.</p>
-      <div class="footer-social">
-        <a href="https://github.com/Monisha1708" target="_blank" rel="noreferrer">GitHub</a>
-        <a href="http://linkedin.com/in/monisha-1-5a26b7280" target="_blank" rel="noreferrer">LinkedIn</a>
-        <a href="mailto:monishaloganathan1708@gmail.com">Email</a>
       </div>
-    </footer>
+    </section>
 
-    <script src="./script.js" defer></script>
-  </body>
+    <section data-animate>
+      <div class="section-header">
+        <h2 class="section-title">Core Skills</h2>
+        <span class="section-subtitle">Strengths I apply to every collaboration</span>
+      </div>
+      <div class="highlights-grid">
+        <article class="highlight-card" data-animate>
+          <h3 class="highlight-title">Front-end Developer</h3>
+          <ul class="list-bullets">
+            <li>Semantic HTML, modern CSS, and responsive layouts</li>
+            <li>JavaScript interactivity and component-driven UI</li>
+          </ul>
+        </article>
+        <article class="highlight-card" data-animate>
+          <h3 class="highlight-title">Cloud & Data</h3>
+          <ul class="list-bullets">
+            <li>AWS Cloud fundamentals and deployment workflows</li>
+            <li>SQL reporting and Python automation scripts</li>
+          </ul>
+        </article>
+        <article class="highlight-card" data-animate>
+          <h3 class="highlight-title">Design & Collaboration</h3>
+          <ul class="list-bullets">
+            <li>UI/UX systems with Wireframes and prototyping in Figma</li>
+            <li>Communication, leadership, and stakeholder alignment</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section data-animate>
+      <div class="section-header">
+        <h2 class="section-title">Languages</h2>
+        <span class="section-subtitle">How I communicate and craft interfaces</span>
+      </div>
+      <div class="highlights-grid">
+        <article class="highlight-card" data-animate>
+          <h3 class="highlight-title">Spoken</h3>
+          <ul class="list-bullets">
+            <li>English</li>
+            <li>Tamil</li>
+          </ul>
+        </article>
+        <article class="highlight-card" data-animate>
+          <h3 class="highlight-title">Technical</h3>
+          <ul class="list-bullets">
+            <li>HTML, CSS, JavaScript</li>
+            <li>Python</li>
+            <li>SQL</li>
+            <li>Java (basic)</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer data-animate>
+    <p>© <span id="footer-year"></span> Monisha.L Designing the future of web experiences.</p>
+    <div class="footer-social">
+      <a href="https://github.com/Monisha1708" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="http://linkedin.com/in/monisha-1-5a26b7280" target="_blank" rel="noreferrer">LinkedIn</a>
+      <a href="mailto:monishaloganathan1708@gmail.com">Email</a>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="./script.js" defer></script>
+</body>
+
 </html>

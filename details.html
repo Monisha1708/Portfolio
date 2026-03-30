@@ -1,75 +1,494 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio • Details  </title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./style.css" />
-  </head>
-  <body>
-    <div class="floating-shape shape-1"></div>
-    <div class="floating-shape shape-2"></div>
-    <div class="floating-shape shape-3"></div>
 
-    <header class="site-header" data-animate>
-      <div class="header-brand">
-        <img class="header-avatar" src="./asset/monisha.jpg" alt="Monisha portrait" />
-        <a class="logo" href="./index.html">
-          <span>Monisha.L</span>
-        </a>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio • Details</title>
+  <meta name="description"
+    content="Get in touch with Monisha L — available for website, web app, AWS hosting and UI design projects." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./style.css" />
+  <style>
+    /* ── Availability card ── */
+    .availability-card {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.1rem 1.6rem;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(106, 250, 204, 0.12), rgba(118, 196, 255, 0.08));
+      border: 1.5px solid rgba(106, 250, 204, 0.35);
+      backdrop-filter: blur(12px);
+      margin: 0 auto 2.2rem;
+      width: fit-content;
+      min-width: 220px;
+    }
+
+    .availability-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #6afacc;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 0 rgba(106, 250, 204, 0.6);
+      animation: pulseGreen 1.8s ease-in-out infinite;
+    }
+
+    @keyframes pulseGreen {
+      0% {
+        box-shadow: 0 0 0 0 rgba(106, 250, 204, 0.7);
+      }
+
+      70% {
+        box-shadow: 0 0 0 10px rgba(106, 250, 204, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(106, 250, 204, 0);
+      }
+    }
+
+    .availability-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+
+    .availability-text strong {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #6afacc;
+      letter-spacing: 0.04em;
+    }
+
+    .availability-text span {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+    }
+
+    /* ── Details layout ── */
+    .details-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    /* ── Enquiry form ── */
+    .enquiry-form {
+      display: grid;
+      gap: 1.1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .form-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(118, 196, 255, 0.75);
+      font-weight: 500;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border-radius: 14px;
+      border: 1.5px solid rgba(118, 196, 255, 0.18);
+      background: rgba(6, 8, 18, 0.65);
+      color: var(--text-primary);
+      font: inherit;
+      font-size: 0.95rem;
+      transition: border-color 240ms cubic-bezier(0.25, 0.8, 0.25, 1),
+        box-shadow 240ms cubic-bezier(0.25, 0.8, 0.25, 1);
+      outline: none;
+    }
+
+    .form-select {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%239ba7d3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+      cursor: pointer;
+    }
+
+    .form-select option {
+      background: #0a0e1f;
+      color: var(--text-primary);
+    }
+
+    .form-textarea {
+      min-height: 120px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-color: rgba(106, 250, 204, 0.55);
+      box-shadow: 0 0 0 3px rgba(106, 250, 204, 0.1);
+    }
+
+    /* invalid state */
+    .form-input.input-error,
+    .form-select.input-error,
+    .form-textarea.input-error {
+      border-color: rgba(255, 100, 100, 0.55);
+      box-shadow: 0 0 0 3px rgba(255, 100, 100, 0.1);
+    }
+
+    .field-error {
+      font-size: 0.75rem;
+      color: #ff7070;
+      margin-top: 0.15rem;
+      display: none;
+    }
+
+    .field-error.visible {
+      display: block;
+    }
+
+    .form-submit {
+      margin-top: 0.4rem;
+      width: 100%;
+      justify-content: center;
+      padding: 0.9rem 1.4rem;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border: none;
+      background: linear-gradient(135deg,
+          rgba(73, 231, 168, 0.92) 0%,
+          rgba(73, 231, 168, 0.607) 45%,
+          rgba(118, 196, 255, 0.85) 100%);
+      background-size: 220% 220%;
+      background-position: 0% 50%;
+      border-radius: 999px;
+      color: #040510;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 20px 40px rgba(73, 231, 168, 0.25);
+      transition: transform 240ms cubic-bezier(0.25, 0.8, 0.25, 1),
+        box-shadow 240ms cubic-bezier(0.25, 0.8, 0.25, 1),
+        background-position 520ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .form-submit:hover {
+      background-position: 100% 50%;
+      transform: translateY(-3px) scale(1.01);
+      box-shadow: 0 28px 60px rgba(118, 196, 255, 0.4);
+    }
+
+    /* success toast */
+    .toast {
+      display: none;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.9rem 1.2rem;
+      border-radius: 14px;
+      background: rgba(106, 250, 204, 0.12);
+      border: 1.5px solid rgba(106, 250, 204, 0.4);
+      color: #6afacc;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-top: 0.6rem;
+      animation: fadeInUp 0.4s ease;
+    }
+
+    .toast.visible {
+      display: flex;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .details-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .availability-card {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .availability-card {
+        padding: 0.9rem 1.1rem;
+        gap: 0.8rem;
+      }
+
+      .form-input,
+      .form-select,
+      .form-textarea {
+        padding: 0.75rem 0.85rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="floating-shape shape-1"></div>
+  <div class="floating-shape shape-2"></div>
+  <div class="floating-shape shape-3"></div>
+  <div class="nav-overlay"></div>
+  <nav class="mobile-nav">
+    <ul>
+      <li><a href="./index.html">Home</a></li>
+      <li><a href="./projects.html">Projects</a></li>
+      <li><a href="./about.html">About</a></li>
+      <li><a href="./details.html">Details</a></li>
+    </ul>
+    <div class="mobile-nav-cta">
+      <a href="asset/Resume.pdf" download>Download Resume</a>
+    </div>
+  </nav>
+
+  <header class="site-header" data-animate>
+    <div class="header-brand">
+      <img class="header-avatar" src="./asset/monisha.jpg" alt="Monisha portrait" />
+      <a class="logo" href="./index.html">
+        <span>Monisha.L</span>
+      </a>
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="./index.html">Home</a></li>
+        <li><a href="./projects.html">Projects</a></li>
+        <li><a href="./about.html">About</a></li>
+        <li><a href="./details.html" aria-current="page">Details</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="cta-btn ghost" href="./asset/Resume.pdf" download>Download Resume</a>
+      <button class="hamburger-btn" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section data-animate>
+      <div class="section-header">
+        <h1 class="section-title">Let's Build Something Vivid</h1>
+        <span class="section-subtitle">Share your vision—I'll respond within 24 hours.</span>
       </div>
-      <nav>
-        <ul class="nav-links">
-          <li><a href="./index.html">Home</a></li>
-          <li><a href="./projects.html">Projects</a></li>
-          <li><a href="./about.html">About</a></li>
-          <li><a href="./details.html">Details</a></li>
-        </ul>
-      </nav>
-      <a class="cta-btn ghost" href="./asset/resume.pdf" download>Download Resume</a>
-    </header>
 
-    <main>
-      <section data-animate>
-        <div class="section-header">
-          <h1 class="section-title">Let's Build Something Vivid</h1>
-          <span class="section-subtitle">Share your vision—I'll respond within 24 hours.</span>
+      <!-- Availability card -->
+      <div class="availability-card" data-animate>
+        <div class="availability-dot"></div>
+        <div class="availability-text">
+          <strong>Available for Work</strong>
+          <span>Open to freelance &amp; collaborations</span>
         </div>
-        <div class="contact-layout">
-          <div class="contact-card" data-animate>
-            <div class="contact-item">
-              <span>Email</span>
-              <span>monishaloganathan1708@gmail.com</span>
-            </div>
-            <div class="contact-item">
-              <span>Phone</span>
-              <span>+91 90255 83526</span>
-            </div>
-            <div class="contact-item">
-              <span>Location</span>
-              <span>No.02,B07,Police Quarters,Nehru Bazzar Street, Avadi, Chennai - 600054</span>
-            </div>
-            <a class="cta-btn" href="./asset/resume.pdf" download>Download Resume</a>
+      </div>
+
+      <!-- Main two-column layout: contact info + form -->
+      <div class="details-layout">
+
+        <!-- Left: contact info -->
+        <div class="contact-card" data-animate>
+          <div class="contact-item">
+            <span>Email</span>
+            <a class="contact-link" href="mailto:monishaloganathan1708@gmail.com">monishaloganathan1708@gmail.com</a>
           </div>
+          <div class="contact-item">
+            <span>Phone</span>
+            <a class="contact-link" href="tel:+919025583526">+91 90255 83526</a>
+          </div>
+          <div class="contact-item">
+            <span>Location</span>
+            <a class="contact-link"
+              href="https://maps.google.com/?q=No.02,B07,Police+Quarters,Nehru+Bazzar+Street,+Avadi,+Chennai+600054"
+              target="_blank" rel="noreferrer">No.02,B07,Police Quarters,Nehru Bazzar Street, Avadi, Chennai -
+              600054</a>
+          </div>
+          <a class="cta-btn" href="./asset/Resume.pdf" download>Download Resume</a>
         </div>
-      </section>
-    </main>
 
-    <footer data-animate>
-      <p>© <span id="footer-year"></span> Your Name. Designing the future of web experiences.</p>
-      <div class="footer-social">
-        <a href="https://github.com/Monisha1708" target="_blank" rel="noreferrer">GitHub</a>
-        <a href="http://linkedin.com/in/monisha-1-5a26b7280" target="_blank" rel="noreferrer">LinkedIn</a>
-        <a href="mailto:monishaloganathan1708@gmail.com">Email</a>
+        <!-- Right: enquiry form -->
+        <div data-animate>
+          <form class="enquiry-form" id="enquiryForm" novalidate>
+
+            <!-- Name -->
+            <div class="form-group">
+              <label class="form-label" for="clientName">Your Name *</label>
+              <input id="clientName" name="clientName" type="text" class="form-input" placeholder="e.g. Monisha L"
+                autocomplete="name" maxlength="60" />
+              <span class="field-error" id="nameError">Name must contain only letters and spaces.</span>
+            </div>
+
+            <!-- Phone -->
+            <div class="form-group">
+              <label class="form-label" for="clientPhone">Phone Number * (10 digits)</label>
+              <input id="clientPhone" name="clientPhone" type="tel" class="form-input" placeholder="e.g. 9025583526"
+                maxlength="10" inputmode="numeric" />
+              <span class="field-error" id="phoneError">Enter a valid 10-digit mobile number.</span>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+              <label class="form-label" for="clientEmail">Email Address *</label>
+              <input id="clientEmail" name="clientEmail" type="email" class="form-input"
+                placeholder="e.g. you@example.com" autocomplete="email" />
+              <span class="field-error" id="emailError">Enter a valid email address.</span>
+            </div>
+
+            <!-- Category -->
+            <div class="form-group">
+              <label class="form-label" for="projectCategory">Project Category *</label>
+              <select id="projectCategory" name="projectCategory" class="form-select">
+                <option value="" disabled selected>Select a category…</option>
+                <option value="website">Website</option>
+                <option value="web-application">Web Application</option>
+                <option value="aws-hosting">AWS Hosting</option>
+                <option value="ui-design">UI Design</option>
+              </select>
+              <span class="field-error" id="categoryError">Please select a project category.</span>
+            </div>
+
+            <!-- Query -->
+            <div class="form-group">
+              <label class="form-label" for="clientQuery">Project Details *</label>
+              <textarea id="clientQuery" name="clientQuery" class="form-textarea"
+                placeholder="Describe your project, goals, timeline, or any specific requirements…"
+                maxlength="1000"></textarea>
+              <span class="field-error" id="queryError">Please describe your project (min 20 characters).</span>
+            </div>
+
+            <button type="submit" class="form-submit" id="submitBtn">
+              Send Enquiry ✦
+            </button>
+
+            <!-- Success toast -->
+            <div class="toast" id="successToast" role="status" aria-live="polite">
+              ✅ &nbsp;Thank you! I'll get back to you within 24 hours.
+            </div>
+
+          </form>
+        </div>
+
       </div>
-    </footer>
+    </section>
+  </main>
 
-    <script src="./script.js" defer></script>
-  </body>
+  <footer data-animate>
+    <p>© <span id="footer-year"></span> Monisha.L. Designing the future of web experiences.</p>
+    <div class="footer-social">
+      <a href="https://github.com/Monisha1708" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="http://linkedin.com/in/monisha-1-5a26b7280" target="_blank" rel="noreferrer">LinkedIn</a>
+      <a href="mailto:monishaloganathan1708@gmail.com">Email</a>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="./script.js" defer></script>
+  <script>
+    /* ── Enquiry Form Validation ── */
+    const form = document.getElementById('enquiryForm');
+    const nameInput = document.getElementById('clientName');
+    const phoneInput = document.getElementById('clientPhone');
+    const emailInput = document.getElementById('clientEmail');
+    const catSelect = document.getElementById('projectCategory');
+    const queryArea = document.getElementById('clientQuery');
+    const toast = document.getElementById('successToast');
+
+    /* helpers */
+    function showError(input, errorId) {
+      input.classList.add('input-error');
+      document.getElementById(errorId).classList.add('visible');
+    }
+
+    function clearError(input, errorId) {
+      input.classList.remove('input-error');
+      document.getElementById(errorId).classList.remove('visible');
+    }
+
+    /* real-time: name — allow only letters + spaces */
+    nameInput.addEventListener('input', () => {
+      nameInput.value = nameInput.value.replace(/[^a-zA-Z\s]/g, '');
+      clearError(nameInput, 'nameError');
+    });
+
+    /* real-time: phone — allow only digits, max 10 */
+    phoneInput.addEventListener('input', () => {
+      phoneInput.value = phoneInput.value.replace(/\D/g, '').slice(0, 10);
+      clearError(phoneInput, 'phoneError');
+    });
+
+    emailInput.addEventListener('input', () => clearError(emailInput, 'emailError'));
+    catSelect.addEventListener('change', () => clearError(catSelect, 'categoryError'));
+    queryArea.addEventListener('input', () => clearError(queryArea, 'queryError'));
+
+    /* form submit */
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let valid = true;
+
+      /* validate name */
+      const nameVal = nameInput.value.trim();
+      if (!nameVal || !/^[a-zA-Z\s]+$/.test(nameVal)) {
+        showError(nameInput, 'nameError'); valid = false;
+      }
+
+      /* validate phone — exactly 10 digits */
+      const phoneVal = phoneInput.value.trim();
+      if (!/^\d{10}$/.test(phoneVal)) {
+        showError(phoneInput, 'phoneError'); valid = false;
+      }
+
+      /* validate email */
+      const emailVal = emailInput.value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+        showError(emailInput, 'emailError'); valid = false;
+      }
+
+      /* validate category */
+      if (!catSelect.value) {
+        showError(catSelect, 'categoryError'); valid = false;
+      }
+
+      /* validate query */
+      const queryVal = queryArea.value.trim();
+      if (queryVal.length < 20) {
+        showError(queryArea, 'queryError'); valid = false;
+      }
+
+      if (!valid) return;
+
+      /* success */
+      form.reset();
+      toast.classList.add('visible');
+      setTimeout(() => toast.classList.remove('visible'), 5000);
+    });
+  </script>
+</body>
+
 </html>
